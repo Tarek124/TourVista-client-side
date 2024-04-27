@@ -3,6 +3,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
@@ -15,11 +16,7 @@ const AuthContext = ({ children }) => {
   const githubProvider = new GithubAuthProvider();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const [theme, setTheme] = useState("light");
-  // Theme
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+
   //create User With Email And Password
   const createUser = (email, password) => {
     setLoading(true);
@@ -40,6 +37,11 @@ const AuthContext = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  //log out
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
   //   onAuthStateChanged
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -50,13 +52,12 @@ const AuthContext = ({ children }) => {
   }, []);
   const appData = {
     loading,
-    theme,
     user,
-    toggleTheme,
     createUser,
     createUserWithGoogle,
     createUserWithGithub,
     logIn,
+    logOut,
   };
   return <AppContext.Provider value={appData}>{children}</AppContext.Provider>;
 };

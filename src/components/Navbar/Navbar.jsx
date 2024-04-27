@@ -1,16 +1,50 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user } = useContext(AppContext);
+  const initialTheme = localStorage.getItem("theme") || "light";
+  const [isChecked, setIsChecked] = useState(false);
+  const [theme, setTheme] = useState(initialTheme);
+  const { user, logOut } = useContext(AppContext);
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+    if (!isChecked) {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
+  };
+
+  
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    console.log(localTheme);
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+
+  console.log(isChecked);
+  const name = user?.displayName
+    ? user?.displayName?.toUpperCase()
+    : user?.email;
+  const signout = () => {
+    logOut().then(() => {
+      Swal.fire({
+        title: "Logout success",
+        text: "You clicked the button!",
+        icon: "success",
+      });
+    });
+  };
   const navLink = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/allTouristsSpot">All Tourists Spot,</NavLink>
+        <NavLink to="/allTouristsSpot">All Tourists Spot</NavLink>
       </li>
       <li>
         <NavLink to="/addTouristsSpot">Add Tourists Spot</NavLink>
@@ -55,7 +89,11 @@ const Navbar = () => {
       <div className="navbar-end">
         <label className="swap swap-rotate mx-2">
           {/* this hidden checkbox controls the state */}
-          <input type="checkbox" />
+          <input
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+            type="checkbox"
+          />
 
           {/* sun icon */}
           <svg
@@ -97,10 +135,9 @@ const Navbar = () => {
               </div>
 
               <li className="font-semibold -tracking-tight">
-                <a>{user.displayName?.toUpperCase()}</a>
+                <a>{name.length > 15 ? name.slice(0, 15) + "..." : name}</a>
               </li>
-              <li className="bg-slate-400 glass rounded-md">
-                {/* onClick={logOut} */}
+              <li onClick={signout} className="rounded-md">
                 <NavLink to="/">Logout</NavLink>
               </li>
             </ul>

@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 
 const AddTouristsSpot = () => {
   const [seassonValue, setSeassonValue] = useState("");
+  const [country, setCountry] = useState("");
   const [travelTime, setTravelTime] = useState("");
   const handleSeassonChange = (e) => {
     setSeassonValue(e.target.value);
@@ -10,11 +11,13 @@ const AddTouristsSpot = () => {
   const handleTravelTimeChange = (e) => {
     setTravelTime(e.target.value);
   };
+  const handleCountry = (e) => {
+    setCountry(e.target.value);
+  };
   const handleAddTouristsSpot = (e) => {
     e.preventDefault();
     const form = e.target;
     const tourists_spot_name = form.tourists_spot_name.value;
-    const country_Name = form.country_Name.value;
     const location = form.location.value;
     const short_description = form.short_description.value;
     const average_cost = form.average_cost.value;
@@ -23,7 +26,7 @@ const AddTouristsSpot = () => {
     //all details about the spot
     const newTouristsSpot = {
       tourists_spot_name,
-      country_Name,
+      country,
       location,
       short_description,
       average_cost,
@@ -42,13 +45,12 @@ const AddTouristsSpot = () => {
       .then((res) => res.json())
       .then((data) => {
         Swal.fire({
-            title: "Good job!",
-            text: "You clicked the button!",
-            icon: "success"
-          });
+          title: "Good job!",
+          text: "You clicked the button!",
+          icon: "success",
+        });
         form.reset();
-        console.log(data)
-
+        console.log(data);
       });
     console.log(newTouristsSpot);
   };
@@ -57,12 +59,11 @@ const AddTouristsSpot = () => {
     <div className="flex justify-center">
       <form
         onSubmit={handleAddTouristsSpot}
-        className="w-full flex flex-col justify-center bg-[#F3F3F3] rounded p-8 shadow"
+        className="w-full flex flex-col justify-center rounded p-8 "
       >
-        <h1 className="text-3xl text-center font-semibold">
+        <h1 className="text-3xl my-6 text-center font-semibold">
           Add a TouristsSpot
         </h1>
-        <div className="border-b border-[#c5c5c5] my-6 " />
         <div className="md:flex gap-4">
           <label className="form-control w-full ">
             <div className="label">
@@ -82,13 +83,20 @@ const AddTouristsSpot = () => {
             <div className="label">
               <span className="label-text font-semibold">Country Name</span>
             </div>
-            <input
-              type="text"
-              placeholder="country_Name"
-              className="input input-bordered w-full"
+            <select
               required
-              name="country_Name"
-            />
+              value={country}
+              onChange={handleCountry}
+              className="select select-bordered w-full"
+            >
+              <option>Country Name</option>
+              <option value="Winter">Bangladesh</option>
+              <option value="Summer">Thailand</option>
+              <option value="Spring">Indonesia</option>
+              <option value="Monsoon">Malaysia</option>
+              <option value="Rainy">Vietnam</option>
+              <option value="Monsoon">Cambodia</option>
+            </select>
           </label>
         </div>
         <div className="md:flex gap-4">
@@ -140,9 +148,7 @@ const AddTouristsSpot = () => {
               onChange={handleSeassonChange}
               className="select select-bordered w-full"
             >
-              <option disabled selected>
-                Seasonality
-              </option>
+              <option>Seasonality</option>
               <option value="Winter">Winter</option>
               <option value="Summer">Summer</option>
               <option value="Spring">Spring</option>
@@ -176,8 +182,8 @@ const AddTouristsSpot = () => {
               onChange={handleTravelTimeChange}
               className="select select-bordered w-full"
             >
-              <option disabled selected>
-                Travel_time
+              <option>
+                Travel Time
               </option>
               <option value="3Days">3Days</option>
               <option value="7Days">7Days</option>
@@ -208,7 +214,6 @@ const AddTouristsSpot = () => {
               type="text"
               placeholder="your name"
               className="input input-bordered w-full"
-              
               name="name"
             />
           </label>
@@ -220,7 +225,6 @@ const AddTouristsSpot = () => {
               type="email"
               placeholder="Email Address"
               className="input input-bordered w-full"
-              
               name="email"
             />
           </label>
