@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -10,8 +9,8 @@ import { AppContext } from "../../context/AuthContext";
 
 const Register = () => {
   const { createUser } = useContext(AppContext);
-  // const navigate = useNavigate();
-  // const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [showPass, setShowPass] = useState(false);
 
   let errorMsg = "";
@@ -39,9 +38,12 @@ const Register = () => {
                   progress: undefined,
                   theme: "colored",
                   transition: Bounce,
-                  onClose: () => {},
+                  onClose: () => {
+                    navigate(location?.state ? location.state : "/");
+                  },
                 })
                 .catch((err) => console.log(err));
+              console.log(res);
             })
             .catch((err) => console.log(err));
         } else {
@@ -54,7 +56,6 @@ const Register = () => {
       alert("Password must contain at least one uppercase letter");
     }
   };
-  console.log(errorMsg);
   return (
     <div className="flex justify-center md:my-20 my-4 ">
       <Helmet>
@@ -75,7 +76,7 @@ const Register = () => {
       />
       <form
         onSubmit={handleRegister}
-        className="w-[450px] flex flex-col justify-center bg-[#F3F3F3] rounded p-8 shadow"
+        className="w-[450px] flex flex-col justify-center shadow-xl rounded p-8 "
       >
         <h1 className="text-3xl text-center font-semibold">
           Register your account
@@ -149,12 +150,10 @@ const Register = () => {
           <input type="checkbox" required className="checkbox" />
           <p className="font-semibold text-sm">Accept Term & Conditions</p>
         </div>
-        <button className="btn bg-[#1e2218] text-white mt-4 hover:text-black">
-          Register
-        </button>
+        <button className="btn btn-success text-white mt-4">Register</button>
         <p className="text-center mt-4 text-sm">
           Have An Account ?
-          <Link className="text-blue-500 font-semibold mx-1" to="/Login">
+          <Link className="text-blue-500 font-semibold mx-1" to="/login">
             Login
           </Link>
         </p>

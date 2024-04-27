@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
+import { AppContext } from "../../context/AuthContext";
 
 const AddTouristsSpot = () => {
   const [seassonValue, setSeassonValue] = useState("");
   const [country, setCountry] = useState("");
   const [travelTime, setTravelTime] = useState("");
+  const { user } = useContext(AppContext);
   const handleSeassonChange = (e) => {
     setSeassonValue(e.target.value);
   };
@@ -52,7 +54,6 @@ const AddTouristsSpot = () => {
         form.reset();
         console.log(data);
       });
-    console.log(newTouristsSpot);
   };
 
   return (
@@ -182,9 +183,7 @@ const AddTouristsSpot = () => {
               onChange={handleTravelTimeChange}
               className="select select-bordered w-full"
             >
-              <option>
-                Travel Time
-              </option>
+              <option>Travel Time</option>
               <option value="3Days">3Days</option>
               <option value="7Days">7Days</option>
               <option value="15Days">15Days</option>
@@ -215,6 +214,7 @@ const AddTouristsSpot = () => {
               placeholder="your name"
               className="input input-bordered w-full"
               name="name"
+              defaultValue={user.displayName ? user.displayName : ""}
             />
           </label>
           <label className="form-control w-full ">
@@ -226,13 +226,11 @@ const AddTouristsSpot = () => {
               placeholder="Email Address"
               className="input input-bordered w-full"
               name="email"
+              defaultValue={user.email ? user.email : "default"}
             />
           </label>
         </div>
-
-        <button className="btn bg-[#1e2218] text-white mt-4 hover:text-black">
-          Submit
-        </button>
+        <button className="btn mt-5 btn-success text-white">Submit</button>
       </form>
     </div>
   );

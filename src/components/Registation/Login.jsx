@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -11,12 +10,12 @@ import { AppContext } from "../../context/AuthContext";
 const Login = () => {
   const { createUserWithGoogle, createUserWithGithub, logIn } =
     useContext(AppContext);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
-  // const location = useLocation();
-  // const navigator = () => {
-  //   return navigate(location?.state ? location.state : "/");
-  // };
+  const location = useLocation();
+  const navigator = () => {
+    return navigate(location?.state ? location.state : "/");
+  };
   const notify = (msg, name, x = null) => {
     toast[name](msg, {
       position: "top-right",
@@ -35,10 +34,9 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-
     createUserWithGoogle()
       .then((result) => {
-        notify("Login Successful", "success",);
+        notify("Login Successful", "success", navigator);
         console.log(result.user);
       })
       .catch((err) => {
@@ -50,7 +48,7 @@ const Login = () => {
     createUserWithGithub()
       .then((result) => {
         console.log(result.user);
-        notify("Login Successful", "success", );
+        notify("Login Successful", "success", navigator);
       })
       .catch((err) => {
         console.log(err);
@@ -65,12 +63,12 @@ const Login = () => {
     logIn(email, password)
       .then((result) => {
         console.log(result);
-        notify("Login Successful", "success", );
+        notify("Login Successful", "success", navigator);
       })
       .catch((err) => {
         notify("Incorrect password", "error");
+        console.log(err);
       });
-    console.log(email, password);
   };
   return (
     <div className="flex justify-center md:my-20 my-4">
@@ -92,7 +90,7 @@ const Login = () => {
       />
       <form
         onSubmit={handleLogin}
-        className="w-[450px] flex flex-col justify-center bg-[#F3F3F3] rounded p-8"
+        className="w-[450px] flex flex-col justify-center shadow-xl rounded p-8"
       >
         <h1 className="text-3xl text-center font-semibold">
           Login your account
@@ -138,7 +136,7 @@ const Login = () => {
           </div>
         </div>
 
-        <button className="btn bg-[#1e2218] text-white mt-4 hover:text-black">
+        <button className="btn btn-success text-white mt-4 hover:text-black">
           Login
         </button>
         <p className="text-center mt-4 text-sm">
@@ -150,13 +148,13 @@ const Login = () => {
         <div className="my-4 border-b"></div>
         <div
           onClick={handleGoogleLogin}
-          className="flex items-center gap-1 justify-center btn bg-blue-300"
+          className="flex items-center gap-1 text-black justify-center btn bg-blue-300"
         >
           <FaGoogle /> Google
         </div>
         <div
           onClick={handleGithubLogin}
-          className="flex items-center gap-1 justify-center btn bg-slate-300 mt-2"
+          className="flex items-center gap-1 justify-center btn text-black bg-slate-300 mt-2"
         >
           <FaGithub />
           Github

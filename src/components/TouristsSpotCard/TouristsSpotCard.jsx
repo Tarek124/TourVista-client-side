@@ -28,7 +28,7 @@ export default function TouristsSpotCard({ item }) {
               <NavLink
                 to={`/details/${item._id}`}
                 type="button"
-                className="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
+                className="shadow-lg bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
               >
                 View Details
               </NavLink>

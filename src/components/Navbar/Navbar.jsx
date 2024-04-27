@@ -11,13 +11,12 @@ const Navbar = () => {
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
     if (!isChecked) {
-      setTheme("light");
-    } else {
       setTheme("dark");
+    } else {
+      setTheme("light");
     }
   };
 
-  
   useEffect(() => {
     localStorage.setItem("theme", theme);
     const localTheme = localStorage.getItem("theme");
