@@ -21,10 +21,11 @@ export default function AllTouristsSpotCard({ item }) {
 
           <div className="mt-3 text-sm leading-6 dark:text-slate-400">
             {description}
-            <h1 className="mt-2 text-lg font-semibold md:text-2xl text-black">
-              {item?.price}
-            </h1>
-            <div className="py-2">
+            <p>Visitor Per Year: {item?.totaVisitorsPerYear}</p>
+            <p>Travel Time : {item?.travelTime}</p>
+            <p>Seasson : {item?.seassonValue}</p>
+            <p>Average Cost : {item?.average_cost} $</p>
+            <div className="py-2 mt-1">
               <NavLink
                 to={`/details/${item._id}`}
                 type="button"

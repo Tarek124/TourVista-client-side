@@ -21,7 +21,7 @@ export default function TouristsSpotCard({ item }) {
 
           <div className="mt-3 text-sm leading-6 dark:text-slate-400">
             {description}
-
+         
             <div className="py-2 mt-1">
               <NavLink
                 to={`/details/${item._id}`}

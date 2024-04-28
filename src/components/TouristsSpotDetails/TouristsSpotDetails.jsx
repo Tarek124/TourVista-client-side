@@ -22,21 +22,19 @@ export default function TouristsSpotDetails() {
               </p>
             </div>
             <p className="text-normal leading-4 font-light my-1">
-              {data.seassonValue}
+              Seasson: {data.seassonValue}
             </p>
             <div className="flex gap-3 my-2">
               <p className="text-xl leading-4 font-medium my-1">
-                Average Cost:
+                <span>Average Cost: </span>
                 <span className="font-semibold">
-                  {data.average_cost} tk only
+                  {data.average_cost} $ only
                 </span>
               </p>
             </div>
             <p className="text-xl leading-4 font-medium my-1">
-              Visitor Per Year:
-              <span className="font-semibold">
-                {data.totaVisitorsPerYear} tk only
-              </span>
+              <span>Visitor Per Year: </span>
+              <span className="font-semibold">{data.totaVisitorsPerYear}</span>
             </p>
             <NavLink
               to={`/details/${data._id}`}
@@ -47,11 +45,7 @@ export default function TouristsSpotDetails() {
             </NavLink>
           </div>
           <div className="inline-block h-full w-full max-w-[640px] overflow-hidden">
-            <img
-              src={data.photoURL}
-              alt=""
-              className=""
-            />
+            <img src={data.photoURL} alt="" className="" />
           </div>
         </div>
       </div>
