@@ -10,6 +10,12 @@ import { Autoplay } from "swiper/modules";
 import { NavLink } from "react-router-dom";
 
 export default function CountryCard({ item, inx }) {
+  const getRandomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  const randomNumber = getRandomNumber(2000, 5000);
+
   return (
     <div
       data-aos={inx % 2 === 0 ? "fade-up-right" : "fade-up-left"}
@@ -34,7 +40,7 @@ export default function CountryCard({ item, inx }) {
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
-            delay: 4500,
+            delay: randomNumber,
             disableOnInteraction: false,
           }}
           modules={[Autoplay]}

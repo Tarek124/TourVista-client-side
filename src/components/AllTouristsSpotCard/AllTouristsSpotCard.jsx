@@ -3,7 +3,7 @@ import "aos/dist/aos.css";
 import { NavLink } from "react-router-dom";
 
 AOS.init();
-export default function TouristsSpotCard({ item }) {
+export default function AllTouristsSpotCard({ item }) {
   const description =
     item?.short_description.length > 200
       ? item.short_description.slice(0, 200)
@@ -21,8 +21,10 @@ export default function TouristsSpotCard({ item }) {
 
           <div className="mt-3 text-sm leading-6 dark:text-slate-400">
             {description}
-
-            <div className="py-2 mt-1">
+            <h1 className="mt-2 text-lg font-semibold md:text-2xl text-black">
+              {item?.price}
+            </h1>
+            <div className="py-2">
               <NavLink
                 to={`/details/${item._id}`}
                 type="button"

@@ -6,9 +6,10 @@ import { ToastContainer, Bounce, toast } from "react-toastify";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { AppContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  const { createUser } = useContext(AppContext);
+  const { createUser, updateUser } = useContext(AppContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [showPass, setShowPass] = useState(false);
@@ -27,25 +28,37 @@ const Register = () => {
         if (password.length >= 6) {
           createUser(email, password)
             .then((res) => {
-              toast
-                .success("Registration Successful", {
-                  position: "top-right",
-                  autoClose: 1000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "colored",
-                  transition: Bounce,
-                  onClose: () => {
-                    navigate(location?.state ? location.state : "/");
-                  },
+              updateUser(name, photoURL)
+                .then(() => {
+                  toast
+                    .success("Registration Successful", {
+                      position: "top-right",
+                      autoClose: 1000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "colored",
+                      transition: Bounce,
+                      onClose: () => {
+                        navigate(location?.state ? location.state : "/");
+                      },
+                    })
+                    .catch((err) => console.log(err));
                 })
                 .catch((err) => console.log(err));
+
               console.log(res);
             })
-            .catch((err) => console.log(err));
+            .catch(() => {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Email already in use!",
+                footer: '<a href="login">Want to Login?</a>'
+              });
+            });
         } else {
           alert("Password Length must be at least 6 character");
         }

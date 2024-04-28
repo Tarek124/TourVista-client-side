@@ -16,15 +16,17 @@ export default function Countries() {
       </h1>
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold">
         <span>Now, its your turn to </span>
-        <Typewriter
-          words={["Explore", "Discover", "Experience"]}
-          loop={Infinity}
-          cursor
-          cursorStyle="_"
-          typeSpeed={70}
-          deleteSpeed={50}
-          delaySpeed={1000}
-        />
+        <span className="text-indigo-500">
+          <Typewriter
+            words={["Explore", "Discover", "Experience"]}
+            loop={Infinity}
+            cursor
+            cursorStyle="_"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+          />
+        </span>
       </h1>
       <div className="p-4 md:p-0">
         {countries.map((item, inx) => (

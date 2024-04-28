@@ -26,7 +26,7 @@ export default function TouristsSpotDetails() {
             </p>
             <div className="flex gap-3 my-2">
               <p className="text-xl leading-4 font-medium my-1">
-                Average Cost:{" "}
+                Average Cost:
                 <span className="font-semibold">
                   {data.average_cost} tk only
                 </span>
@@ -35,7 +35,6 @@ export default function TouristsSpotDetails() {
             <p className="text-xl leading-4 font-medium my-1">
               Visitor Per Year:
               <span className="font-semibold">
-                {" "}
                 {data.totaVisitorsPerYear} tk only
               </span>
             </p>
@@ -47,11 +46,13 @@ export default function TouristsSpotDetails() {
               Book Now
             </NavLink>
           </div>
-          <img
-            src={data.photoURL}
-            alt=""
-            className="inline-block h-full w-full max-w-[640px]"
-          />
+          <div className="inline-block h-full w-full max-w-[640px] overflow-hidden">
+            <img
+              src={data.photoURL}
+              alt=""
+              className=""
+            />
+          </div>
         </div>
       </div>
     </Fade>

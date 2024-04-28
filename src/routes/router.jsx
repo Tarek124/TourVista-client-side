@@ -8,6 +8,7 @@ import NotFoundPage from "../components/NotFoundPage/NotFoundPage";
 import TouristsSpotDetails from "../components/TouristsSpotDetails/TouristsSpotDetails";
 import CountriesDetails from "../components/CountriesDetails/CountriesDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AllTouristsSpot from "../components/AllTouristsSpot/AllTouristsSpot";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
         element: <CountriesDetails />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/countries/${params.id}`),
+      },
+      {
+        path: "/allTouristsSpot",
+        element: <AllTouristsSpot />,
+        loader: () => fetch("http://localhost:5000/touristSpots"),
       },
     ],
   },
