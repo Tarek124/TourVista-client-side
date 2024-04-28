@@ -3,7 +3,10 @@ import { NavLink, useLoaderData } from "react-router-dom";
 
 export default function TouristsSpotDetails() {
   const data = useLoaderData();
-  console.log(data);
+  const description =
+    data?.short_description.length > 270
+      ? data.short_description.slice(0, 270)
+      : data?.short_description;
   return (
     <Fade cascade damping={0.1} delay={200}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
@@ -12,7 +15,7 @@ export default function TouristsSpotDetails() {
             <h1 className="mb-6 text-4xl font-bold md:text-6xl">
               {data.tourists_spot_name}
             </h1>
-            <p className=" max-w-lg text-base ">{data.short_description}</p>
+            <p className=" max-w-lg text-base ">{description}</p>
             <div className="flex gap-3 ">
               <p className="text-normal leading-4 font-medium my-1">
                 {data.location},
@@ -27,9 +30,7 @@ export default function TouristsSpotDetails() {
             <div className="flex gap-3 my-2">
               <p className="text-xl leading-4 font-medium my-1">
                 <span>Average Cost: </span>
-                <span className="font-semibold">
-                  {data.average_cost} $ only
-                </span>
+                <span className="font-semibold">{data.average_cost}$ only</span>
               </p>
             </div>
             <p className="text-xl leading-4 font-medium my-1">
