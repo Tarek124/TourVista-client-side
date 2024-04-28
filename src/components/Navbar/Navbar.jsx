@@ -5,12 +5,11 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
   const initialTheme = localStorage.getItem("theme") || "light";
-  const [isChecked, setIsChecked] = useState(false);
+
   const [theme, setTheme] = useState(initialTheme);
   const { user, logOut } = useContext(AppContext);
   const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-    if (!isChecked) {
+    if (event.target.checked) {
       setTheme("dark");
     } else {
       setTheme("light");
@@ -20,11 +19,9 @@ const Navbar = () => {
   useEffect(() => {
     localStorage.setItem("theme", theme);
     const localTheme = localStorage.getItem("theme");
-    console.log(localTheme);
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
 
-  console.log(isChecked);
   const name = user?.displayName
     ? user?.displayName?.toUpperCase()
     : user?.email;
@@ -89,7 +86,7 @@ const Navbar = () => {
         <label className="swap swap-rotate mx-2">
           {/* this hidden checkbox controls the state */}
           <input
-            checked={isChecked}
+            checked={theme === "dark"}
             onChange={handleCheckboxChange}
             type="checkbox"
           />

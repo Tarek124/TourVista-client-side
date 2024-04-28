@@ -36,6 +36,8 @@ const AddTouristsSpot = () => {
       photoURL,
       seassonValue,
       travelTime,
+      email: user.email,
+      name: user.displayName,
     };
     fetch("http://localhost:5000/touristSpots", {
       method: "POST",
@@ -48,7 +50,7 @@ const AddTouristsSpot = () => {
       .then((data) => {
         Swal.fire({
           title: "Good job!",
-          text: "You clicked the button!",
+          text: "Add New Tourists Spot!",
           icon: "success",
         });
         form.reset();
