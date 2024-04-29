@@ -7,7 +7,7 @@ const Navbar = () => {
   const initialTheme = localStorage.getItem("theme") || "light";
 
   const [theme, setTheme] = useState(initialTheme);
-  const { user, logOut } = useContext(AppContext);
+  const { user, logOut, loading } = useContext(AppContext);
   const handleCheckboxChange = (event) => {
     if (event.target.checked) {
       setTheme("dark");
@@ -139,9 +139,15 @@ const Navbar = () => {
             </ul>
           </div>
         ) : (
-          <NavLink to="/login" className="btn btn-link p-0">
-            Login
-          </NavLink>
+          <div>
+            {loading ? (
+              <div className="loading loading-spinner"></div>
+            ) : (
+              <NavLink to="/login" className="btn btn-link p-0">
+                Login
+              </NavLink>
+            )}
+          </div>
         )}
       </div>
     </div>

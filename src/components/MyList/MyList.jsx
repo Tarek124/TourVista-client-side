@@ -56,7 +56,7 @@ export default function MyList() {
   console.log(myData);
   return user ? (
     <div>
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold md:mt-4 py-4 ">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold md:mt-4 py-4 md:px-0 px-4 ">
         My List
       </h1>
       <div className="">

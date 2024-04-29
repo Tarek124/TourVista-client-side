@@ -5,6 +5,7 @@ import Countries from "../components/Countries/Countries";
 import { useContext } from "react";
 import { AppContext } from "../context/AuthContext";
 import { ClipLoader } from "react-spinners";
+import AboutUs from "../components/AboutUs/AboutUs";
 
 const Root = () => {
   const data = useLoaderData();
@@ -18,6 +19,7 @@ const Root = () => {
       <Slider data={data} />
       <TouristsSpot data={data} />
       <Countries />
+      <AboutUs />
     </div>
   );
 };

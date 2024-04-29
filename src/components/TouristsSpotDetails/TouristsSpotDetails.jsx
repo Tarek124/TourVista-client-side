@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import { Fade } from "react-awesome-reveal";
 import { NavLink, useLoaderData } from "react-router-dom";
+import { AppContext } from "../../context/AuthContext";
 
 export default function TouristsSpotDetails() {
+  const { isValidURL } = useContext(AppContext);
   const data = useLoaderData();
   const description =
     data?.short_description.length > 270
       ? data.short_description.slice(0, 270)
       : data?.short_description;
+  console.log(data.photoURL);
   return (
     <Fade cascade damping={0.1} delay={200}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
@@ -30,7 +34,7 @@ export default function TouristsSpotDetails() {
             <div className="flex gap-3 my-2">
               <p className="text-xl leading-4 font-medium my-1">
                 <span>Average Cost: </span>
-                <span className="font-semibold">{data.average_cost}$ only</span>
+                <span className="font-semibold">{data.average_cost}$</span>
               </p>
             </div>
             <p className="text-xl leading-4 font-medium my-1">
@@ -46,7 +50,11 @@ export default function TouristsSpotDetails() {
             </NavLink>
           </div>
           <div className="inline-block h-full w-full max-w-[640px] overflow-hidden">
-            <img src={data.photoURL} alt="" className="" />
+            {isValidURL(data.photoURL) ? (
+              <img src={data.photoURL} alt="" className="" />
+            ) : (
+              <div className="skeleton h-full w-full max-w-[640px] shadow-md"></div>
+            )}
           </div>
         </div>
       </div>

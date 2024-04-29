@@ -1,13 +1,18 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AppContext } from "../../context/AuthContext";
 
 AOS.init();
 export default function AllTouristsSpotCard({ item }) {
+  const { isValidURL } = useContext(AppContext);
   const description =
     item?.short_description.length > 200
       ? item.short_description.slice(0, 200)
       : item?.short_description;
+
+      console.log(isValidURL(item.photoURL))
   return (
     <main className="py-6 px-4 sm:p-6 md:py-8 md:px-0" data-aos="zoom-in-up">
       <div className="flex gap-2 flex-col-reverse">
@@ -37,12 +42,16 @@ export default function AllTouristsSpotCard({ item }) {
           </div>
         </div>
         <div>
-          <img
-            src={item?.photoURL}
-            alt=""
-            className="w-full rounded-lg shadow-xl"
-            loading="lazy"
-          />
+          {isValidURL(item?.photoURL) ? (
+            <img
+              src={item?.photoURL}
+              alt=""
+              className="w-full rounded-lg shadow-xl"
+              loading="lazy"
+            />
+          ) : (
+            <div data-tip="image not found" className="skeleton h-[350px] w-full max-w-[640px] tooltip shadow-lg"></div>
+          )}
         </div>
       </div>
     </main>
