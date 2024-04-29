@@ -1,8 +1,10 @@
+import { useLoaderData } from "react-router-dom";
 import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AppContext } from "../../context/AuthContext";
 
-const AddTouristsSpot = () => {
+export default function UpdateTouristSpot() {
+  const data = useLoaderData();
   const [seassonValue, setSeassonValue] = useState("");
   const [country, setCountry] = useState("");
   const [travelTime, setTravelTime] = useState("");
@@ -39,25 +41,37 @@ const AddTouristsSpot = () => {
       email: user.email,
       name: user.displayName,
     };
-    fetch("http://localhost:5000/touristSpots", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newTouristsSpot),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        Swal.fire({
-          title: "Good job!",
-          text: "Add New Tourists Spot!",
-          icon: "success",
-        });
-        form.reset();
-        console.log(data);
-      });
-  };
 
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/touristSpots/${data._id}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newTouristsSpot),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.modifiedCount) {
+              Swal.fire("Saved!", "", "success");
+            } else {
+              Swal.fire("Please change somthing to update", "", "info");
+            }
+            console.log(data);
+          });
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
   return (
     <div className="flex justify-center">
       <form
@@ -65,8 +79,7 @@ const AddTouristsSpot = () => {
         className="w-full flex flex-col justify-center rounded p-8 "
       >
         <h1 className="text-3xl my-6 text-center font-semibold">
-          Add a TouristsSpot
-        </h1>
+          You can Update your Spot        </h1>
         <div className="md:flex gap-4">
           <label className="form-control w-full ">
             <div className="label">
@@ -79,6 +92,7 @@ const AddTouristsSpot = () => {
               placeholder="tourists_spot_name"
               className="input input-bordered w-full"
               required
+              defaultValue={data?.tourists_spot_name}
               name="tourists_spot_name"
             />
           </label>
@@ -88,7 +102,7 @@ const AddTouristsSpot = () => {
             </div>
             <select
               required
-              value={country}
+              value={data?.country}
               onChange={handleCountry}
               className="select select-bordered w-full"
             >
@@ -112,6 +126,7 @@ const AddTouristsSpot = () => {
               placeholder="location"
               className="input input-bordered w-full"
               required
+              defaultValue={data?.location}
               name="location"
             />
           </label>
@@ -123,6 +138,7 @@ const AddTouristsSpot = () => {
               type="text"
               placeholder="short description"
               className="textarea textarea-bordered w-full"
+              defaultValue={data?.short_description}
               required
               name="short_description"
             />
@@ -137,6 +153,7 @@ const AddTouristsSpot = () => {
               type="text"
               placeholder="average_cost"
               className="input input-bordered w-full"
+              defaultValue={data?.average_cost}
               required
               name="average_cost"
             />
@@ -147,7 +164,7 @@ const AddTouristsSpot = () => {
             </div>
             <select
               required
-              value={seassonValue}
+              value={data?.seassonValue}
               onChange={handleSeassonChange}
               className="select select-bordered w-full"
             >
@@ -171,6 +188,7 @@ const AddTouristsSpot = () => {
               type="text"
               placeholder="totaVisitorsPerYear"
               className="input input-bordered w-full"
+              defaultValue={data?.totaVisitorsPerYear}
               required
               name="totaVisitorsPerYear"
             />
@@ -181,7 +199,7 @@ const AddTouristsSpot = () => {
             </div>
             <select
               required
-              value={travelTime}
+              value={data?.travelTime}
               onChange={handleTravelTimeChange}
               className="select select-bordered w-full"
             >
@@ -202,6 +220,7 @@ const AddTouristsSpot = () => {
             type="text"
             placeholder="Photo URL"
             className="input input-bordered w-full"
+            defaultValue={data?.photoURL}
             required
             name="photoURL"
           />
@@ -217,7 +236,7 @@ const AddTouristsSpot = () => {
               className="input input-bordered w-full"
               name="name"
               disabled
-              defaultValue={user.displayName ? user.displayName : ""}
+              defaultValue={data?.name}
             />
           </label>
           <label className="form-control w-full ">
@@ -230,14 +249,12 @@ const AddTouristsSpot = () => {
               className="input input-bordered w-full"
               name="email"
               disabled
-              defaultValue={user.email ? user.email : "default"}
+              defaultValue={data?.email}
             />
           </label>
         </div>
-        <button className="btn mt-5 btn-success text-white">Submit</button>
+        <button className="btn mt-5 btn-success text-white">Update</button>
       </form>
     </div>
   );
-};
-
-export default AddTouristsSpot;
+}

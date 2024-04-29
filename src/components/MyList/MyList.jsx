@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AuthContext";
 import { ClipLoader } from "react-spinners";
 import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
+import { Fade } from "react-awesome-reveal";
 
 export default function MyList() {
   const [myData, setMyData] = useState([]);
@@ -60,35 +62,39 @@ export default function MyList() {
       <div className="">
         {myData &&
           myData.map((spots) => (
-            <div
-              key={spots._id}
-              className="my-8 card shadow-lg hover:shadow-2xl transition-shadow p-4"
-            >
-              <div>
-                <div />
-                <div>
-                  <h2 className="text-2xl font-semibold font-serif mb-4">
-                    {spots.tourists_spot_name}
-                  </h2>
+            <div key={spots._id}>
+              <Fade cascade damping={0.1} delay={200}>
+                <div className="my-8 card shadow-lg hover:shadow-2xl transition-shadow p-4">
+                  <div />
                   <div>
-                    <p>{spots.short_description}</p>
-                    <div className="flex flex-wrap my-1 gap-4">
-                      <p>Seasson: {spots.seassonValue}</p>
-                      <p>Average Cost: {spots.average_cost}</p>
+                    <h2 className="text-2xl font-semibold font-serif mb-4">
+                      {spots.tourists_spot_name}
+                    </h2>
+                    <div>
+                      <p>{spots.short_description}</p>
+                      <div className="flex flex-wrap my-1 gap-4">
+                        <p>Seasson: {spots.seassonValue}</p>
+                        <p>Average Cost: {spots.average_cost}</p>
+                      </div>
+                      <p className="mb-3">Travel Time : {spots.travelTime}</p>
                     </div>
-                    <p className="mb-3">Travel Time : {spots.travelTime}</p>
+                  </div>
+                  <div className="my-2">
+                    <NavLink
+                      to={`/update/${spots._id}`}
+                      className="btn btn-success text-white"
+                    >
+                      Edit
+                    </NavLink>
+                    <button
+                      className="btn bg-red-500 text-white mx-2"
+                      onClick={() => handleDelete(spots._id)}
+                    >
+                      Detete
+                    </button>
                   </div>
                 </div>
-                <div className="my-2">
-                  <button className="btn btn-success text-white">Edit</button>
-                  <button
-                    className="btn bg-red-500 text-white mx-2"
-                    onClick={() => handleDelete(spots._id)}
-                  >
-                    Detete
-                  </button>
-                </div>
-              </div>
+              </Fade>
             </div>
           ))}
       </div>
