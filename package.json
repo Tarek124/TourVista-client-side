@@ -10,10 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.15.15",
-    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "aos": "^2.3.4",
     "daisyui": "^4.10.2",
     "dotenv": "^16.4.5",
@@ -32,7 +28,6 @@
     "react-toast": "^1.0.3",
     "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",
-    "styled-components": "^6.1.8",
     "sweetalert2": "^11.10.8",
     "swiper": "^11.1.1"
   },
