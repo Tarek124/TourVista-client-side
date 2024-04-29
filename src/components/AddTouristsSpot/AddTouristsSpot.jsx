@@ -216,6 +216,7 @@ const AddTouristsSpot = () => {
               placeholder="your name"
               className="input input-bordered w-full"
               name="name"
+              disabled
               defaultValue={user.displayName ? user.displayName : ""}
             />
           </label>
@@ -228,6 +229,7 @@ const AddTouristsSpot = () => {
               placeholder="Email Address"
               className="input input-bordered w-full"
               name="email"
+              disabled
               defaultValue={user.email ? user.email : "default"}
             />
           </label>

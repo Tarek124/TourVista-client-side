@@ -1,37 +1,119 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AppContext } from "../../context/AuthContext";
+import { ClipLoader } from "react-spinners";
+import Swal from "sweetalert2";
 
 export default function MyList() {
+  const [myData, setMyData] = useState([]);
   const { user } = useContext(AppContext);
   const data = useLoaderData();
 
-  const filterData = data.filter((x) => x?.email === user?.email);
-  return (
+  useEffect(() => {
+    if (data) {
+      const filterData = data.filter((x) => x?.email === user?.email);
+      if (filterData) {
+        setMyData(filterData);
+      }
+    }
+  }, [user]);
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/touristSpots/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => {
+            // Check if the response status indicates success
+            if (res.ok) {
+              return res.json();
+            } else {
+              throw new Error("Failed to delete");
+            }
+          })
+          .then((data) => {
+            // Check if the server confirmed deletion
+            if (data.success) {
+              console.log("Deletion successful:", data);
+
+              // Ensure `myData` is correctly defined and accessible
+              const newData = myData.filter((item) => item._id !== id);
+
+              console.log("Filtered data:", newData);
+              Swal.fire({
+                title: "Deleted!",
+                text: "This spot has been deleted.",
+                icon: "success",
+              });
+            } else {
+              throw new Error("Deletion unsuccessful");
+            }
+          })
+          .catch((err) => {
+            console.error("Error during deletion:", err);
+            Swal.fire({
+              title: "Error",
+              text: "Could not delete this spot.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
+
+  console.log(myData);
+  return user ? (
     <div>
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold md:mt-4 py-4 ">
         My List
       </h1>
-      <div className="flex flex-wrap gap-4 justify-start">
-        {filterData.map((spots) => (
-          <div key={spots._id} className={``}>
-            <div>
-              <div />
+      <div className="">
+        {myData &&
+          myData.map((spots) => (
+            <div
+              key={spots._id}
+              className="my-8 card shadow-lg hover:shadow-2xl transition-shadow p-4"
+            >
               <div>
-                <div>{spots.tourists_spot_name}</div>
+                <div />
                 <div>
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
+                  <h2 className="text-2xl font-semibold font-serif mb-4">
+                    {spots.tourists_spot_name}
+                  </h2>
+                  <div>
+                    <p>{spots.short_description}</p>
+                    <div className="flex flex-wrap my-1 gap-4">
+                      <p>Seasson: {spots.seassonValue}</p>
+                      <p>Average Cost: {spots.average_cost}</p>
+                    </div>
+                    <p className="mb-3">Travel Time : {spots.travelTime}</p>
+                  </div>
+                </div>
+                <div className="my-2">
+                  <button className="btn btn-success text-white">Edit</button>
+                  <button
+                    className="btn bg-red-500 text-white mx-2"
+                    onClick={() => handleDelete(spots._id)}
+                  >
+                    Detete
+                  </button>
                 </div>
               </div>
-              <div>
-                <button size="small">Share</button>
-                <button size="small">Learn More</button>
-              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
+    </div>
+  ) : (
+    <div className="flex justify-center items-center h-[80vh]">
+      <ClipLoader color="#36d7b7" />
     </div>
   );
 }

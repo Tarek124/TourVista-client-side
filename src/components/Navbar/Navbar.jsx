@@ -113,7 +113,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-hover dropdown-end">
             <div tabIndex={0} role="button" className=" m-1">
               <div className="avatar">
-                <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <div className="w-9 rounded-full ring-offset-base-100 ring-offset-2">
                   <img src={user.photoURL} />
                 </div>
               </div>
