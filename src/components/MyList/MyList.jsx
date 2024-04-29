@@ -55,8 +55,8 @@ export default function MyList() {
 
   console.log(myData);
   return user ? (
-    <div>
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold md:mt-4 py-4 md:px-0 px-4 ">
+    <div className=" md:px-4 2xl:px-0">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold md:mt-4 py-4 px-4 ">
         My List
       </h1>
       <div className="">
@@ -64,7 +64,7 @@ export default function MyList() {
           myData.map((spots) => (
             <div key={spots._id}>
               <Fade cascade damping={0.1} delay={200}>
-                <div className="my-8 card shadow-lg hover:shadow-2xl transition-shadow p-4">
+                <div className="my-4 md:my-8 card shadow-lg hover:shadow-2xl transition-shadow p-4">
                   <div />
                   <div>
                     <h2 className="text-2xl font-semibold font-serif mb-4">

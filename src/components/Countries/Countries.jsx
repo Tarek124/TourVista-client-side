@@ -10,11 +10,11 @@ export default function Countries() {
       .then((data) => setCountries(data));
   }, []);
   return (
-    <div className="my-8">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold md:mt-4 py-4">
+    <div className="my-8 md:px-4 2xl:px-0">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl md:px-0 px-4 font-semibold md:mt-4 py-4">
         Countrys
       </h1>
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold md:px-0 px-4">
         <span>Now, its your turn to </span>
         <span className="text-indigo-500">
           <Typewriter
@@ -28,7 +28,7 @@ export default function Countries() {
           />
         </span>
       </h1>
-      <div className="p-4 md:p-0">
+      <div className=" md:p-0">
         {countries.map((item, inx) => (
           <CountryCard key={item._id} item={item} inx={inx + 21} />
         ))}

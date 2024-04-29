@@ -1,34 +1,35 @@
+import Lottie from "lottie-react";
+import groovyWalkAnimation from "./apSVaWGB5g.json";
+
 export default function AboutUs() {
   return (
-    <section className="bg-[#f2f2f7]">
+    <section className="">
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
-        <div className="flex flex-col-reverse justify-start gap-8 sm:gap-20 lg:flex-row">
-          <img
-            src="https://assets.website-files.com/6357722e2a5f19121d37f84d/635b53eeec84c014ec421d16_Group%20183.png"
-            alt=""
-            className="inline-block max-w-xl"
-          />
-          <div className="flex flex-col items-start lg:justify-center">
-            <img
-              src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6358ca7f4a2963633083434e_PayPal%20Logo-2.svg"
-              alt=""
-              className="mb-4 inline-block"
+        <div className="flex flex-col-reverse lg:items-center justify-start gap-8 sm:gap-20 lg:flex-row">
+          <div className="lg:w-1/2">
+            <Lottie
+              animationData={groovyWalkAnimation}
+              loop={true}
+              autoplay={true}
             />
-            <p className="mb-6 max-w-md text-[#636262] md:mb-12">
-              {" "}
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
-              aliquam, purus sit amet luctus venenatis, “Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit ut aliquam, purus sit amet
-              luctus venenatis, lectus magna fringilla urna, porttitor rhoncus
-              dolor purus non enim.
+          </div>
+          <div className="flex flex-col items-start lg:justify-center">
+            <h1 className="text-xl md:text-5xl font-bold my-5">TourVista</h1>
+            <p className="mb-6 max-w-2xl md:mb-12">
+              Exploring new destinations is a journey of discovery, offering a
+              blend of adventure, culture, and cuisine. Whether you're strolling
+              through the bustling markets of Marrakech, enjoying the serene
+              landscapes of the Swiss Alps, or savoring the flavors of Italy,
+              travel provides an escape from the ordinary and a chance to
+              broaden your horizons.
               <br />
               <br />
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
-              aliquam, purus sit amet luctus venenatis, lectus magna fringilla
-              urna, porttitor rhoncus dolor purus non enim.”
+              Travelers are drawn to the unique experiences each location
+              offers. Some are captivated by the historical sites of Rome, while
+              others find peace in the tranquil beaches
             </p>
-            <p className="font-bold">John Robert</p>
-            <p className="text-sm text-[#647084]">Senior Webflow Developer</p>
+            <p className="font-bold">Abdullah Al Tarek</p>
+            <p className="text-sm text-[#647084]">Junior Web Developer</p>
           </div>
         </div>
       </div>
