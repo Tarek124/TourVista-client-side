@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
 import { AppContext } from "../../context/AuthContext";
 import { ClipLoader } from "react-spinners";
 import Swal from "sweetalert2";
@@ -7,16 +6,15 @@ import Swal from "sweetalert2";
 export default function MyList() {
   const [myData, setMyData] = useState([]);
   const { user } = useContext(AppContext);
-  const data = useLoaderData();
+  const [update, setUpdate] = useState(true);
 
   useEffect(() => {
-    if (data) {
-      const filterData = data.filter((x) => x?.email === user?.email);
-      if (filterData) {
-        setMyData(filterData);
-      }
-    }
-  }, [user]);
+    fetch(`http://localhost:5000/myData/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setMyData(data))
+      .catch((err) => console.log(err));
+  }, [user, update]);
+
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -28,34 +26,18 @@ export default function MyList() {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "This spot has been deleted.",
+          icon: "success",
+        });
         fetch(`http://localhost:5000/touristSpots/${id}`, {
           method: "DELETE",
         })
-          .then((res) => {
-            // Check if the response status indicates success
-            if (res.ok) {
-              return res.json();
-            } else {
-              throw new Error("Failed to delete");
-            }
-          })
+          .then((res) => res.json())
           .then((data) => {
-            // Check if the server confirmed deletion
-            if (data.success) {
-              console.log("Deletion successful:", data);
-
-              // Ensure `myData` is correctly defined and accessible
-              const newData = myData.filter((item) => item._id !== id);
-
-              console.log("Filtered data:", newData);
-              Swal.fire({
-                title: "Deleted!",
-                text: "This spot has been deleted.",
-                icon: "success",
-              });
-            } else {
-              throw new Error("Deletion unsuccessful");
-            }
+            setUpdate(!update);
+            console.log(data);
           })
           .catch((err) => {
             console.error("Error during deletion:", err);

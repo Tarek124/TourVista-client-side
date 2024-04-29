@@ -60,7 +60,6 @@ const router = createBrowserRouter([
       {
         path: "/mylist",
         element: <MyList />,
-        loader: () => fetch("http://localhost:5000/mylist"),
       },
     ],
   },
