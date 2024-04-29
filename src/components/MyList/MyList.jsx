@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { AppContext } from "../../context/AuthContext";
 
 export default function MyList() {
-  const { user } = useContext(AppContext)
+  const { user } = useContext(AppContext);
   const data = useLoaderData();
 
   const filterData = data.filter((x) => x?.email === user?.email);
@@ -14,10 +14,7 @@ export default function MyList() {
       </h1>
       <div className="flex flex-wrap gap-4 justify-start">
         {filterData.map((spots) => (
-          <div
-            key={spots._id}
-            className={``}
-          >
+          <div key={spots._id} className={``}>
             <div>
               <div />
               <div>
