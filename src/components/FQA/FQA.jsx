@@ -6,7 +6,7 @@ export default function FQA() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/fqa")
+    fetch("https://y-one-taupe.vercel.app/fqa")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);

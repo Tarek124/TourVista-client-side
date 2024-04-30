@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Root />,
-        loader: () => fetch("http://localhost:5000/touristSpots"),
+        loader: () => fetch("https://y-one-taupe.vercel.app/touristSpots"),
       },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/touristSpots/${params.id}`),
+          fetch(`https://y-one-taupe.vercel.app/touristSpots/${params.id}`),
       },
       {
         path: "/countries/:id",
@@ -51,12 +51,12 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/countries/${params.id}`),
+          fetch(`https://y-one-taupe.vercel.app/countries/${params.id}`),
       },
       {
         path: "/allTouristsSpot",
         element: <AllTouristsSpot />,
-        loader: () => fetch("http://localhost:5000/alltouristSpots"),
+        loader: () => fetch("https://y-one-taupe.vercel.app/alltouristSpots"),
       },
       {
         path: "/mylist",
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/update/${params.id}`),
+          fetch(`https://y-one-taupe.vercel.app/update/${params.id}`),
       },
     ],
   },

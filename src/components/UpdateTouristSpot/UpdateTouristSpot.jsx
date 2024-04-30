@@ -51,7 +51,7 @@ export default function UpdateTouristSpot() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/touristSpots/${data._id}`, {
+        fetch(`https://y-one-taupe.vercel.app/touristSpots/${data._id}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json",

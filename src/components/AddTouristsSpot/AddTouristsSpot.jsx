@@ -39,7 +39,7 @@ const AddTouristsSpot = () => {
       email: user.email,
       name: user.displayName,
     };
-    fetch("http://localhost:5000/touristSpots", {
+    fetch("https://y-one-taupe.vercel.app/touristSpots", {
       method: "POST",
       headers: {
         "content-type": "application/json",

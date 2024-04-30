@@ -11,7 +11,7 @@ export default function MyList() {
   const [update, setUpdate] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myData/${user?.email}`)
+    fetch(`https://y-one-taupe.vercel.app/myData/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setMyData(data))
       .catch((err) => console.log(err));
@@ -33,7 +33,7 @@ export default function MyList() {
           text: "This spot has been deleted.",
           icon: "success",
         });
-        fetch(`http://localhost:5000/touristSpots/${id}`, {
+        fetch(`https://y-one-taupe.vercel.app/touristSpots/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
