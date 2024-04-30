@@ -17,7 +17,7 @@ export default function AboutUs() {
             <h1 className="text-xl md:text-5xl font-bold my-5">TourVista</h1>
             <p className="mb-6 max-w-2xl md:mb-12">
               Exploring new destinations is a journey of discovery, offering a
-              blend of adventure, culture, and cuisine. Whether you're strolling
+              blend of adventure, culture, and cuisine. Whether you are strolling
               through the bustling markets of Marrakech, enjoying the serene
               landscapes of the Swiss Alps, or savoring the flavors of Italy,
               travel provides an escape from the ordinary and a chance to

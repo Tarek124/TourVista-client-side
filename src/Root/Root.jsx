@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/AuthContext";
 import { ClipLoader } from "react-spinners";
 import AboutUs from "../components/AboutUs/AboutUs";
+import FQA from "../components/FQA/FQA";
 
 const Root = () => {
   const data = useLoaderData();
@@ -20,6 +21,7 @@ const Root = () => {
       <TouristsSpot data={data} />
       <Countries />
       <AboutUs />
+      <FQA />
     </div>
   );
 };

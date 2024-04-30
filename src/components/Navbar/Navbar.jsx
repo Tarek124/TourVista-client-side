@@ -114,7 +114,7 @@ const Navbar = () => {
             <div tabIndex={0} role="button" className=" m-1">
               <div className="avatar">
                 <div className="w-9 rounded-full ring-offset-base-100 ring-offset-2">
-                  <img src={user.photoURL} />
+                  <img src={user?.photoURL} />
                 </div>
               </div>
             </div>
@@ -125,7 +125,7 @@ const Navbar = () => {
               <div className="flex justify-center my-2">
                 <img
                   className="rounded-full w-24 shadow-2xl"
-                  src={user.photoURL}
+                  src={user?.photoURL}
                   alt=""
                 />
               </div>
