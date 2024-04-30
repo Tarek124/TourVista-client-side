@@ -4,9 +4,10 @@ import { ClipLoader } from "react-spinners";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
+import { Helmet } from "react-helmet";
 
 export default function MyList() {
-  const [myData, setMyData] = useState([]);
+  const [myData, setMyData] = useState(null);
   const { user } = useContext(AppContext);
   const [update, setUpdate] = useState(true);
 
@@ -53,9 +54,11 @@ export default function MyList() {
     });
   };
 
-  console.log(myData);
-  return user ? (
+  return myData ? (
     <div className=" md:px-4 2xl:px-0">
+      <Helmet>
+        <title>My List</title>
+      </Helmet>
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold md:mt-4 py-4 px-4 ">
         My List
       </h1>

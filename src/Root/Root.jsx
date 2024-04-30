@@ -7,6 +7,7 @@ import { AppContext } from "../context/AuthContext";
 import { ClipLoader } from "react-spinners";
 import AboutUs from "../components/AboutUs/AboutUs";
 import FQA from "../components/FQA/FQA";
+import { Helmet } from "react-helmet";
 
 const Root = () => {
   const data = useLoaderData();
@@ -17,12 +18,15 @@ const Root = () => {
     </div>
   ) : (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Slider data={data} />
       <TouristsSpot data={data} />
       <Countries />
       <AboutUs />
       <FQA />
-    </div>
+    </div> 
   );
 };
 

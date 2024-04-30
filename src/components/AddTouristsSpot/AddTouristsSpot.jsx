@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AppContext } from "../../context/AuthContext";
+import { Helmet } from "react-helmet";
 
 const AddTouristsSpot = () => {
   const [seassonValue, setSeassonValue] = useState("");
@@ -60,6 +61,9 @@ const AddTouristsSpot = () => {
 
   return (
     <div className="flex justify-center">
+      <Helmet>
+        <title>Add Tourists Spot</title>
+      </Helmet>
       <form
         onSubmit={handleAddTouristsSpot}
         className="w-full flex flex-col justify-center rounded p-8 "

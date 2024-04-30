@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import AllTouristsSpotCard from "../AllTouristsSpotCard/AllTouristsSpotCard";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 export default function AllTouristsSpot() {
   const data = useLoaderData();
@@ -13,6 +14,9 @@ export default function AllTouristsSpot() {
 
   return (
     <div className="md:mt-12">
+      <Helmet>
+        <title>All Tourists Spot</title>
+      </Helmet>
       <details className="dropdown px-4">
         <summary className="m-1 btn btn-success text-white">Filter</summary>
         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
